@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/* ========================================
+DESIGN TOKENS (based on your logo)
+======================================== */
+
+@theme {
+
+/* ===== COLORS ===== */
+
+--color-bg: #020617;
+--color-surface: #0B1120;
+--color-card: #111827;
+
+--color-primary-400: #22D3EE;
+--color-primary-500: #38BDF8;
+--color-primary-600: #3B82F6;
+--color-primary-700: #2563EB;
+
+--color-text-primary: #E2E8F0;
+--color-text-secondary: #94A3B8;
+--color-text-muted: #64748B;
+
+--color-border: #1E293B;
+
+/* ===== SPACING SYSTEM (8px scale) ===== */
+
+--space-xs: 4px;
+--space-sm: 8px;
+--space-md: 16px;
+--space-lg: 24px;
+--space-xl: 32px;
+--space-2xl: 48px;
+--space-3xl: 64px;
+--space-4xl: 96px;
+
+/* ===== BORDER RADIUS ===== */
+
+--radius-sm: 6px;
+--radius-md: 10px;
+--radius-lg: 14px;
+--radius-xl: 20px;
+
+}
+
+/* ========================================
+BASE STYLES (global website style)
+======================================== */
+
+@layer base {
+
+body {
+@apply bg-[#020617] text-[--color-text-primary] antialiased;
+font-family: "Inter", sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+font-family: "Space Grotesk", sans-serif;
+}
+
+h1 {
+@apply text-3xl font-bold;
+}
+
+/* h2 {
+@apply text-2xl font-semibold;
+} */
+
+h3 {
+@apply text-xl font-semibold;
+}
+
+p {
+@apply text-base leading-relaxed text-text-secondary;
+}
+
+}
+
+/* ========================================
+REUSABLE COMPONENT CLASSES
+======================================== */
+
+@layer components {
+
+/* Page container */
+
+.container-page {
+@apply max-w-6xl mx-auto px-6;
+}
+
+/* Section spacing */
+
+.section {
+@apply py-20;
+}
+
+/* Card */
+
+.card {
+@apply bg-[#111827] border border-slate-800 rounded-xl p-6 transition;
+}
+
+.card:hover {
+@apply border-cyan-400;
+}
+
+/* Primary Button */
+
+.btn-primary {
+@apply px-6 py-3 rounded-lg text-white font-medium
+bg-gradient-to-r from-cyan-400 to-blue-500
+transition duration-300 hover:scale-105;
+}
+
+/* Secondary Button */
+
+.btn-outline {
+@apply px-6 py-3 rounded-lg border border-slate-700
+text-slate-200 transition hover:border-cyan-400;
+}
+
+}
+
+/* ========================================
+UTILITIES
+======================================== */
+
+@layer utilities {
+
+/* Glow effect matching logo */
+
+.glow {
+box-shadow: 0 0 25px rgba(34,211,238,0.25);
+}
+html {
+  scroll-behavior: smooth;
+}
+}
