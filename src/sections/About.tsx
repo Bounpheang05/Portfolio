@@ -38,8 +38,8 @@ const About = () => {
           </p>
             //language ability section
           <div className="space-y-4">
-            <p className="text-primary-500 font-medium">
-              Language ability:
+            <p className="text-primary-500 text-lg font-bold">
+              Language ability
             </p>
           
             <div className="space-y-4">
