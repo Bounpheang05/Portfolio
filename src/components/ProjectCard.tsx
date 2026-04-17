@@ -1,11 +1,10 @@
-import React from "react";
 import type { Project } from "../types/projectData";
 
 interface ProjectCardProps {
   project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <li className="group flex flex-col rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:border-primary-500/50 hover:bg-[color:var(--color-card)]">
       <div className="h-48 bg-[color:var(--color-bg)] relative overflow-hidden">

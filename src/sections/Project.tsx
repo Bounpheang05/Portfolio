@@ -28,7 +28,6 @@
 // };
 
 // export default Project;
-import React from 'react'
 import { projects } from '../data/projectData'
 import ProjectCard from '../components/ProjectCard'
 
