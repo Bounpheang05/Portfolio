@@ -38,7 +38,7 @@ const About = () => {
           </p>
             //language ability section
           <div className="space-y-4">
-            <p className="text-primary-400 font-medium">
+            <p className="text-primary-500 font-medium">
               Language ability:
             </p>
           
