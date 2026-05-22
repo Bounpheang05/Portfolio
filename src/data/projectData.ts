@@ -1,6 +1,5 @@
 import type { Project } from "../types/projectData";
-import mypic from "../assets/mypic.jpg";
-
+import mypic from "../assets/mypic.png";
 export const projects: Project[] = [
   {
     id: 1,
