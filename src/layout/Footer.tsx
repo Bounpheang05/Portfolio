@@ -1,6 +1,6 @@
 
-import { FaFacebook, FaGithub } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import {  FaGithub } from "react-icons/fa";
+import { SiGmail, SiWhatsapp } from "react-icons/si";
 
 const Footer = () => {
   return (
@@ -11,9 +11,15 @@ const Footer = () => {
         <p></p>
       </div>
       <div className="flex  justify-center text-2xl text-white gap-5 ">
-        <FaGithub className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
-        <SiGmail className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
-        <FaFacebook className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
+        <a href="https://github.com/Bounpheang05" target="_blank" rel="noopener noreferrer">
+          <FaGithub className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
+        </a>
+        <a href="mailto:bounpheang088@gmail.com" target="_blank" rel="noopener noreferrer">
+          <SiGmail className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
+        </a>
+        <a href="https://wa.me/8562092942017" target="_blank" rel="noopener noreferrer">
+          <SiWhatsapp className="text-5xl hover:text-cyan-400 transition cursor-pointer"/>
+        </a>
       </div>
     </div>
   );
