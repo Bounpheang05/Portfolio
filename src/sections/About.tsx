@@ -1,15 +1,15 @@
 import mypic from "../assets/mypic.png";
 const About = () => {
   return (
-    // 1. เพิ่ม Responsive (flex-col บนมือถือ, flex-row บนจอใหญ่)
-    // 2. ใช้ bg-app-bg เพื่อความต่อเนื่องของธีม
+    // 1. Add responsive layout (flex-col on mobile, flex-row on larger screens)
+    // 2. Use bg-app-bg for consistent theme styling
     <section
       id="about"
       className="min-h-screen bg-app-bg flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-20"
     >
-      {/* Container สำหรับรูปภาพ */}
+      {/* Image container */}
       <div className="relative group">
-        {/* ตกแต่งด้วยเงาหรือขอบเพื่อให้รูปดูมีมิติ */}
+        {/* Add shadow or border styling to give the image depth */}
         <div className="absolute -inset-1 bg-primary-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
         <img
           src={mypic}
@@ -18,7 +18,7 @@ const About = () => {
         />
       </div>
 
-      {/* Container สำหรับข้อความ */}
+      {/* Text content container */}
       <div className="max-w-2xl text-center md:text-left">
         <h2 className="text-primary-500 text-5xl font-bold mb-6">About Me</h2>
 
@@ -76,7 +76,7 @@ const About = () => {
           </div>
         </div>
 
-        {/* เพิ่มลูกเล่นเล็กๆ เช่น Skill Tags */}
+        {/* Optional small enhancement: Skill tags */}
         {/* <div className="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
           {['React', 'TypeScript', 'Tailwind', 'Next.js'].map((skill) => (
             <span key={skill} className="px-3 py-1 bg-app-surface border border-app-border text-primary-400 text-sm rounded-full">
