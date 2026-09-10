@@ -1,92 +1,84 @@
 import mypic from "../assets/mypic.png";
-const About = () => {
+import { Section } from "../components/ui/Section";
+
+const languages = [
+  { name: "Lao", level: "Native", value: 95 },
+  { name: "Thai", level: "Fluent", value: 85 },
+  { name: "English", level: "Upper intermediate", value: 70 },
+];
+
+export default function About() {
   return (
-    // 1. Add responsive layout (flex-col on mobile, flex-row on larger screens)
-    // 2. Use bg-app-bg for consistent theme styling
-    <section
+    <Section
       id="about"
-      className="min-h-screen bg-app-bg flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-20"
+      eyebrow="02 — About"
+      title="Software should be as beautiful as it is functional"
     >
-      {/* Image container */}
-      <div className="relative group">
-        {/* Add shadow or border styling to give the image depth */}
-        <div className="absolute -inset-1 bg-primary-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-        <img
-          src={mypic}
-          alt="Bounpheang's portrait"
-          className="relative h-[390px] w-[350px] object-cover rounded-2xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-      </div>
-
-      {/* Text content container */}
-      <div className="max-w-2xl text-center md:text-left">
-        <h2 className="text-primary-500 text-5xl font-bold mb-6">About Me</h2>
-
-        <div className=" text-lg leading-relaxed space-y-4">
-          <p>
-            I am a developer who believes that software should be as beautiful
-            as it is functional. With a background in <span>UI/UX</span> and a
-            passion for frontend engineering, I bridge the gap between
-            imagination and reality.
-          </p>
-
-          <p>
-            Based in the digital ether, I spend my days exploring the latest in
-            <span className="text-primary-400"> React ecosystems</span>,
-            performance optimization, and architectural patterns. My goal is to
-            build products that are fast, accessible, and a joy to use.
-          </p>
-          {/* language ability section */}
-          <div className="space-y-4">
-            <p className="text-primary-500 text-lg font-bold">
-              Language ability
-            </p>
-
-            <div className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between text-sm text-text-secondary mb-2">
-                  <span>Lao</span>
-                  <span>Native</span>
-                </div>
-                <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-primary-500 to-cyan-300 w-[90%] transition-all duration-700" />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between text-sm text-text-secondary mb-2">
-                  <span>Thai</span>
-                  <span>Fluent</span>
-                </div>
-                <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-primary-500 to-cyan-300 w-[80%] transition-all duration-700" />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between text-sm text-text-secondary mb-2">
-                  <span>English</span>
-                  <span>Upper intermediate</span>
-                </div>
-                <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-primary-500 to-cyan-300 w-[75%] transition-all duration-700" />
-                </div>
-              </div>
-            </div>
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[300px_1fr] lg:gap-16">
+        <div className="mx-auto w-full max-w-75">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-2 rounded-2xl bg-primary-500/15 blur-2xl"
+            />
+            <img
+              src={mypic}
+              alt="Portrait of Bounpheang Khampanyakhoun"
+              width={300}
+              height={360}
+              loading="lazy"
+              className="card-surface relative aspect-5/6 w-full rounded-2xl object-cover"
+            />
           </div>
         </div>
 
-        {/* Optional small enhancement: Skill tags */}
-        {/* <div className="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
-          {['React', 'TypeScript', 'Tailwind', 'Next.js'].map((skill) => (
-            <span key={skill} className="px-3 py-1 bg-app-surface border border-app-border text-primary-400 text-sm rounded-full">
-              {skill}
-            </span>
-          ))}
-        </div> */}
-      </div>
-    </section>
-  );
-};
+        <div className="max-w-2xl">
+          <div className="space-y-4 text-base leading-relaxed text-fg-muted sm:text-lg">
+            <p>
+              I&apos;m a frontend developer with a background in{" "}
+              <span className="text-fg">UI/UX</span>. I care about the details
+              most people never notice — focus states, motion that means
+              something, layouts that hold up at every screen size.
+            </p>
+            <p>
+              My days go into the{" "}
+              <span className="text-primary-300">React ecosystem</span>,
+              performance work, and architectural patterns. The goal is always
+              the same: products that are fast, accessible, and a genuine
+              pleasure to use.
+            </p>
+          </div>
 
-export default About;
+          <div className="mt-10">
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-fg-subtle">
+              Languages
+            </h3>
+            <ul className="mt-5 space-y-5">
+              {languages.map((l) => (
+                <li key={l.name}>
+                  <div className="mb-2 flex items-baseline justify-between text-sm">
+                    <span className="font-medium text-fg">{l.name}</span>
+                    <span className="text-fg-subtle">{l.level}</span>
+                  </div>
+                  <div
+                    role="progressbar"
+                    aria-valuenow={l.value}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${l.name}: ${l.level}`}
+                    className="h-1.5 overflow-hidden rounded-full bg-elevated"
+                  >
+                    <div
+                      className="h-full rounded-full bg-linear-to-r from-primary-500 to-secondary-400"
+                      style={{ width: `${l.value}%` }}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}

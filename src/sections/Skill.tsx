@@ -1,54 +1,35 @@
 import { Skills } from "../data/skillsData";
+import { Section } from "../components/ui/Section";
+import { Reveal } from "../components/ui/Reveal";
 
-const Skill = () => {
+export default function Skill() {
   return (
-    <section
-      id="skill"
-      className="min-h-screen bg-app-bg text-text-secondary flex items-center justify-center py-20 px-6"
+    <Section
+      id="stack"
+      eyebrow="03 — Stack"
+      title="The tools I reach for"
+      description="Technologies I use day to day, chosen for performance, type safety and long-term maintainability."
     >
-      <div className="max-w-6xl w-full">
-        {/* Header Section */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-5xl md:text-6xl font-bold text-primary-500 tracking-tight">
-            The Toolkit
-          </h2>
-          <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto">
-            Technologies I use to bring digital vision to life, focusing on 
-            performance, scalability, and user experience.
-          </p>
-        </div>
-
-        {/* Skills Grid */}
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {Skills.map((skill) => (
-            <li 
-              key={skill.id}
-              className="group p-8 bg-app-surface border border-app-border rounded-2xl 
-                         hover:border-primary-500/50 hover:bg-app-card 
-                         transition-all duration-300 transform hover:-translate-y-2 
-                         flex flex-col items-center text-center shadow-lg"
+      <Reveal stagger>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {Skills.map((s) => (
+            <li
+              key={s.id}
+              className="card-surface group flex flex-col gap-3 rounded-xl p-5 transition-colors duration-300 hover:border-border-strong"
             >
-              {/* Icon Container */}
-              <div className="mb-5 p-4 bg-app-bg rounded-xl text-primary-500 
-                              group-hover:text-primary-400 group-hover:scale-110 
-                              transition-all duration-300 text-5xl">
-                <skill.Icon />
-              </div>
-
-              {/* Text Content */}
-              <h3 className="text-text-primary text-xl font-bold mb-2">
-                {skill.name}
-              </h3>
-              
-              <p className="text-text-muted text-sm leading-relaxed line-clamp-2">
-                {skill.text}
-              </p>
+              <span className="text-2xl text-primary-300 transition-colors group-hover:text-primary-400">
+                <s.Icon aria-hidden="true" focusable="false" />
+              </span>
+              <span className="font-display text-sm font-semibold text-fg">
+                {s.name}
+              </span>
+              <span className="text-xs leading-relaxed text-fg-subtle">
+                {s.text}
+              </span>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
+      </Reveal>
+    </Section>
   );
-};
-
-export default Skill;
+}

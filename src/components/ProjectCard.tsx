@@ -1,58 +1,102 @@
+import { useState } from "react";
+import { FaGithub } from "react-icons/fa";
+import { HiArrowUpRight } from "react-icons/hi2";
 import type { Project } from "../types/projectData";
+import { Tag } from "./ui/Tag";
+import { cn } from "../lib/cn";
 
-interface ProjectCardProps {
+export default function ProjectCard({
+  project,
+  featured = false,
+}: {
   project: Project;
-}
+  featured?: boolean;
+}) {
+  const [imgOk, setImgOk] = useState(true);
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <li className="group flex flex-col rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:border-primary-500/50 hover:bg-[color:var(--color-card)]">
-      <div className="h-48 bg-[color:var(--color-bg)] relative overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+    <li
+      className={cn(
+        "card-surface group relative flex flex-col overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong",
+        featured && "lg:col-span-2 lg:flex-row"
+      )}
+    >
+      <div
+        className={cn(
+          "relative overflow-hidden bg-elevated",
+          featured
+            ? "aspect-video lg:aspect-auto lg:min-h-72 lg:w-1/2"
+            : "aspect-video"
+        )}
+      >
+        {imgOk ? (
+          <img
+            src={project.image}
+            alt={`${project.title} — screenshot`}
+            loading="lazy"
+            width={800}
+            height={450}
+            onError={() => setImgOk(false)}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="flex h-full w-full items-center justify-center bg-linear-to-br from-primary-500/20 via-elevated to-secondary-500/20"
+          >
+            <span className="font-display text-5xl font-bold text-fg/15">
+              {project.title.charAt(0)}
+            </span>
+          </div>
+        )}
       </div>
-      <div className="p-8 flex flex-col grow text-start">
-        <span className="text-sm font-bold text-primary-500 uppercase">
-          {project.tag}
-        </span>
-        <h3 className="text-2xl font-bold mt-4 text-text-primary">
+
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs uppercase tracking-[0.15em] text-primary-300">
+            {project.tag}
+          </span>
+        </div>
+
+        <h3 className="mt-3 font-display text-xl font-semibold text-fg">
           {project.title}
         </h3>
-        <p className="text-text-muted mt-3 text-sm leading-relaxed line-clamp-3">
+
+        <p className="mt-2.5 text-sm leading-relaxed text-fg-muted">
           {project.desc}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.tech.map((item) => (
-            <span
-              key={item}
-              className="px-3 py-2 text-xs text-text-muted bg-[color:var(--color-bg)]/70 rounded-sm border border-[color:var(--color-border)]"
-            >
-              {item}
-            </span>
+
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {project.tech.map((t) => (
+            <li key={t}>
+              <Tag>{t}</Tag>
+            </li>
           ))}
-        </div>
-      </div>
-      <div className="px-8 pb-8 mt-auto">
-        <div className="flex gap-4 items-center text-primary-500">
-          <a
-            href={project.github}
-            className="text-sm font-semibold hover:text-primary-400 transition-colors duration-200"
-          >
-            Github
-          </a>
+        </ul>
+
+        <div className="mt-auto flex items-center gap-5 pt-6">
           <a
             href={project.demo}
-            className="text-sm font-semibold hover:text-primary-400 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} — live demo (opens in a new tab)`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg transition-colors hover:text-primary-300"
           >
-            Demo
+            Live demo
+            <HiArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} — source code on GitHub (opens in a new tab)`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+          >
+            <FaGithub className="h-4 w-4" aria-hidden="true" />
+            Code
           </a>
         </div>
       </div>
     </li>
   );
-};
-
-export default ProjectCard;
+}

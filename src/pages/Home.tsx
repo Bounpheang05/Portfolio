@@ -1,21 +1,17 @@
-import About from "../sections/About";
-import Contact from "../sections/Contact";
 import Hero from "../sections/Hero";
 import Project from "../sections/Project";
+import About from "../sections/About";
 import Skill from "../sections/Skill";
+import Contact from "../sections/Contact";
 
-const Home = () => {
+export default function Home() {
   return (
-    <main>
+    <>
       <Hero />
-      <About />
-
-      <Skill />
-
       <Project />
+      <About />
+      <Skill />
       <Contact />
-    </main>
+    </>
   );
-};
-
-export default Home;
+}

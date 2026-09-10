@@ -1,19 +1,18 @@
-import Navbar from "./Navbar";
-
-import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-const Rootlayout = () => {
+export default function RootLayout() {
   return (
-    <div>
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="main">
         <Outlet />
       </main>
-
       <Footer />
-    </div>
+    </>
   );
-};
-
-export default Rootlayout;
+}

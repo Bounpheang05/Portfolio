@@ -1,5 +1,4 @@
 import type { Project } from "../types/projectData";
-import mypic from "../assets/mypic.png";
 export const projects: Project[] = [
   {
     id: 1,
@@ -37,7 +36,7 @@ export const projects: Project[] = [
     tag: "Finance",
     desc: "Real-time cryptocurrency portfolio tracker with price alerts and historical chart analysis.",
     tech: ["React", "Redux", "CoinGecko API", "Recharts"],
-    image: mypic,
+    image: "/images/project4.png",
     demo: "https://demo-crypto-tracker.com",
     github: "https://github.com/username/crypto-tracker",
   },

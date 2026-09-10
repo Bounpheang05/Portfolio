@@ -1,138 +1,239 @@
 @import "tailwindcss";
 
-/* ========================================
-DESIGN TOKENS (based on your logo)
-======================================== */
+/* ============================================================
+   DESIGN TOKENS — Refined Dark + Cyan
+   OLED-friendly near-black, layered surfaces, sparing glow.
+   ============================================================ */
 
 @theme {
+  /* ---- Surfaces (deepest → highest elevation) ---- */
+  --color-bg: #060a13;
+  --color-surface: #0b111e;
+  --color-elevated: #111a2b;
+  --color-card: #0e1524;
 
-/* ===== COLORS ===== */
+  /* ---- Borders / hairlines ---- */
+  --color-border: #1c2739;
+  --color-border-strong: #2b3a52;
 
---color-bg: #020617;
---color-surface: #0B1120;
---color-card: #111827;
+  /* ---- Brand ---- */
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
 
---color-primary-400: #22D3EE;
---color-primary-500: #38BDF8;
---color-primary-600: #3B82F6;
---color-primary-700: #2563EB;
+  --color-secondary-400: #a78bfa;
+  --color-secondary-500: #8b5cf6;
 
---color-text-primary: #E2E8F0;
---color-text-secondary: #94A3B8;
---color-text-muted: #64748B;
+  /* ---- Text ---- */
+  --color-fg: #f1f5f9;
+  --color-fg-muted: #9fb0c9;
+  --color-fg-subtle: #64748b;
 
---color-border: #1E293B;
+  /* ---- Feedback ---- */
+  --color-success: #34d399;
+  --color-danger: #f87171;
 
-/* ===== SPACING SYSTEM (8px scale) ===== */
+  /* ---- Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
 
---space-xs: 4px;
---space-sm: 8px;
---space-md: 16px;
---space-lg: 24px;
---space-xl: 32px;
---space-2xl: 48px;
---space-3xl: 64px;
---space-4xl: 96px;
+  /* ---- Fonts ---- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
-/* ===== BORDER RADIUS ===== */
+  /* ---- Fluid type scale ---- */
+  --text-display: clamp(2.25rem, 1.1rem + 5vw, 4.25rem);
+  --text-h2: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  --text-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.5rem);
 
---radius-sm: 6px;
---radius-md: 10px;
---radius-lg: 14px;
---radius-xl: 20px;
+  /* ---- Section rhythm ---- */
+  --space-section: clamp(5rem, 3.5rem + 7vw, 9rem);
 
+  /* ---- Shadow / glow ---- */
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.03) inset,
+    0 20px 40px -24px rgb(0 0 0 / 0.7);
+  --glow-primary: 0 0 0 1px rgb(56 189 248 / 0.25),
+    0 8px 40px -8px rgb(56 189 248 / 0.35);
 }
 
-/* ========================================
-BASE STYLES (global website style)
-======================================== */
+/* ============================================================
+   BASE
+   ============================================================ */
 
 @layer base {
+  * {
+    border-color: var(--color-border);
+  }
 
-body {
-@apply bg-[#020617] text-[--color-text-primary] antialiased;
-font-family: "Inter", sans-serif;
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: var(--color-fg);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgb(56 189 248 / 0.3);
+    color: #fff;
+  }
+
+  /* Visible, consistent keyboard focus */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Offset in-page anchors so they clear the sticky header (h-16 = 4rem) */
+  :target {
+    scroll-margin-top: 4.5rem;
+  }
+
+  /* Subtle page-wide radial backdrop */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60rem 40rem at 15% -10%, rgb(56 189 248 / 0.08), transparent 60%),
+      radial-gradient(50rem 40rem at 100% 0%, rgb(167 139 250 / 0.07), transparent 55%);
+  }
 }
 
-h1,h2,h3,h4,h5,h6 {
-font-family: "Space Grotesk", sans-serif;
-}
-
-h1 {
-@apply text-3xl font-bold;
-}
-
-/* h2 {
-@apply text-2xl font-semibold;
-} */
-
-h3 {
-@apply text-xl font-semibold;
-}
-
-p {
-@apply text-base leading-relaxed text-text-secondary;
-}
-
-}
-
-/* ========================================
-REUSABLE COMPONENT CLASSES
-======================================== */
-
-@layer components {
-
-/* Page container */
-
-.container-page {
-@apply max-w-6xl mx-auto px-6;
-}
-
-/* Section spacing */
-
-.section {
-@apply py-20;
-}
-
-/* Card */
-
-.card {
-@apply bg-[#111827] border border-slate-800 rounded-xl p-6 transition;
-}
-
-.card:hover {
-@apply border-cyan-400;
-}
-
-/* Primary Button */
-
-.btn-primary {
-@apply px-6 py-3 rounded-lg text-white font-medium
-bg-gradient-to-r from-cyan-400 to-blue-500
-transition duration-300 hover:scale-105;
-}
-
-/* Secondary Button */
-
-.btn-outline {
-@apply px-6 py-3 rounded-lg border border-slate-700
-text-slate-200 transition hover:border-cyan-400;
-}
-
-}
-
-/* ========================================
-UTILITIES
-======================================== */
+/* ============================================================
+   UTILITIES
+   ============================================================ */
 
 @layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
 
-/* Glow effect matching logo */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-primary-300),
+      var(--color-secondary-400)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
-.glow {
-box-shadow: 0 0 25px rgba(34,211,238,0.25);
+  .card-surface {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .hairline {
+    border-color: var(--color-border);
+  }
+
+  /* Scroll reveal — .is-visible clears the offset */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Stagger children when the parent gains .is-visible */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-stagger.is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.04s; }
+  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.10s; }
+  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.16s; }
+  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.22s; }
+  .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.28s; }
+  .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.34s; }
+  .reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 0.40s; }
+  .reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 0.46s; }
+
+  /* Skip link — off-screen until focused */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 100;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-500);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #04121d;
+    transition: top 0.15s ease;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
 }
-html {
-  scroll-behavior: smooth;
-}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
